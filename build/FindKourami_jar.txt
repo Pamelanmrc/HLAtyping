@@ -1,0 +1,2 @@
+Download Kourami jar file from
+https://github.com/Kingsford-Group/kourami/releases/tag/v0.9.6
