@@ -1,0 +1,27 @@
+Follow the directions from this blog:
+https://hackmd.io/@linnil1/HkOgAjGxK
+
+
+You can successful run Kourmai for HLA typing.
+
+
+java -jar kourami-0.9.6/build/Kourami.jar \
+    -d ${kourami_index}
+    ${sample}_on_KouramiPanel.bam
+    -o ${sample}.kourami
+    
+    
+  
+
+Use this for IMGT alignments to make panel: 
+wget https://github.com/ANHIG/IMGTHLA/raw/3420/Alignments_Rel_3420.zip
+unzip Alignments_Rel_3420.zip
+wget https://github.com/ANHIG/IMGTHLA/raw/3420/wmda/hla_nom_g.txt
+Build Index
+(I use 3.42.0 as example)
+
+java -cp kourami-0.9.6/build/Kourami.jar FormatIMGT Alignments_Rel_3420 v3.42.0 tmp
+mv tmp/v3.42.0 mydb
+cat mydb/*.merged.fa resources/HLA_decoys.fa | gzip > mydb/All_FINAL_with_Decoy.fa.gz
+cp hla_nom_g.txt mydb
+bwa index mydb/All_FINAL_with_Decoy.fa.gz
